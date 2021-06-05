@@ -2,8 +2,10 @@
 
 ### Функционал:
 
-* POST    /employee     добавление User через JSON {"name" : "goha"}
-* GET     /employee     получение списка User
-* DELETE  /employee/id  удаление пользователя по id
-* GET     /employee/id  получить имя пользователя по id
-* PUT     /employee/id  обновить имя пользователя по id  
+```
+* POST    http://localhost:8000/employee     добавление User через JSON {"name" : "yourName"}
+* GET     http://localhost:8000/employee     получение списка User
+* DELETE  http://localhost:8000/employee/id  удаление пользователя по id
+* GET     http://localhost:8000/employee/id  получить имя пользователя по id
+* PUT     http://localhost:8000/employee/id  обновить имя пользователя по id  
+```
