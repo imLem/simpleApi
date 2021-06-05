@@ -47,7 +47,6 @@ func getAllUsers(c echo.Context) error {
 	}
 	allUsers := []Employee{}
 
-
 	for res.Next() {
 		var user Employee
 		err = res.Scan(&user.Id, &user.Name)
@@ -116,24 +115,21 @@ func updUser(c echo.Context) error {
 	}
 	defer db.Close()
 
-id := c.Param("id")
+	id := c.Param("id")
 
-u := new(Employee)
-if err := c.Bind(u); err != nil {
-	return err
-}
+	u := new(Employee)
+	if err := c.Bind(u); err != nil {
+		return err
+	}
 
+	upUser, err := db.Query(fmt.Sprintf("UPDATE `employees` SET `name`='%s' WHERE id='%v'", u.Name, id))
+	if err != nil {
+		fmt.Println(err)
+	}
 
-upUser, err := db.Query(fmt.Sprintf("UPDATE `employees` SET `name`='%s' WHERE id='%v'", u.Name, id))
-if err != nil {
-	fmt.Println(err)
-}
+	defer upUser.Close()
 
-
-defer upUser.Close()
-
-
-return c.String(http.StatusOK, id + "this id updated")
+	return c.String(http.StatusOK, id+"this id updated")
 }
 
 func main() {
